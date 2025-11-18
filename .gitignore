@@ -1,0 +1,16 @@
+# CCS build output
+Debug/
+Release/
+*.out
+*.elf
+*.map
+
+# Objekt- och tempfiler
+*.o
+*.d
+*.obj
+*.lst
+
+# Editor-/OS-filer
+.DS_Store
+*.swp

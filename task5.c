@@ -10,16 +10,15 @@ void main(void)
 {
     WDTCTL = WDTPW + WDTHOLD;      // Stop watchdog timer
 
-    // P1.0, P1.2 och P1.6 som utgångar
+    // Set P1.0, P1.2 och P1.6 as outputs
     P1DIR |= BIT0 | BIT2 | BIT6;
 
-    // Interrupt på P1.5
-    P1IE  |= BIT5;                 // P1.5 interrupt enabled
+    // Interrupt on P1.5
+    P1IE  |= BIT5; 
 
-    // Rising edge: clear bit i P1IES
-    P1IES &= ~BIT5;                // P1.5 low->high edge
+    P1IES &= ~BIT5;                // Rising edge: clear bit in P1IES
 
-    P1IFG &= ~BIT5;                // rensa eventuell flagga
+    P1IFG &= ~BIT5;                // clear any flag
 
     _BIS_SR(GIE);                  // Global Interrupt Enabled
 
@@ -36,8 +35,8 @@ void main(void)
             }
         }
 
-        P1OUT ^= BIT2;             // toggla P1.2
-        P1OUT ^= BIT6;             // toggla P1.6
+        P1OUT ^= BIT2;             // toggle P1.2
+        P1OUT ^= BIT6;             // toggle P1.6
     }
 }
 
@@ -48,7 +47,7 @@ __interrupt void Port_1(void)
     if (P1IFG & BIT5)
     {
         P1OUT ^= BIT0;             // P1.0 = toggle
-        P1IFG &= ~BIT5;            // rensa interrupt-flagga på P1.5
+        P1IFG &= ~BIT5;            // clear interrupt-flag on P1.5
     }
 }
 
