@@ -5,53 +5,6 @@ Task 5
 */
 
 #include <msp430g2553.h>
-
-void main(void)
-{
-    WDTCTL = WDTPW + WDTHOLD;      // Stop watchdog timer
-
-    // Set P1.0, P1.2 och P1.6 as outputs
-    P1DIR |= BIT0 | BIT2 | BIT6;
-
-    // Interrupt on P1.5
-    P1IE  |= BIT5; 
-
-    P1IES &= ~BIT5;                // Rising edge: clear bit in P1IES
-
-    P1IFG &= ~BIT5;                // clear any flag
-
-    _BIS_SR(GIE);                  // Global Interrupt Enabled
-
-    while (1)
-    {
-        volatile int a = 0;
-        volatile int b = 0;
-
-        for (a = 0; a < 10000; a++)
-        {
-            for (b = 0; b < 10000; b++)
-            {
-                __no_operation();
-            }
-        }
-
-        P1OUT ^= BIT2;             // toggle P1.2
-        P1OUT ^= BIT6;             // toggle P1.6
-    }
-}
-
-// Port 1 interrupt service routine
-#pragma vector=PORT1_VECTOR
-__interrupt void Port_1(void)
-{
-    if (P1IFG & BIT5)
-    {
-        P1OUT ^= BIT0;             // P1.0 = toggle
-        P1IFG &= ~BIT5;            // clear interrupt-flag on P1.5
-    }
-}
-
-#include <msp430g2553.h>
 void main(void)
 {
      WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
