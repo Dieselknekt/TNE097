@@ -21,3 +21,11 @@ void ToUpper(char *Str)
         Str++;
     }
 }
+
+void main(){
+    char str[] = "Hello World! 123 abc XYZ.";
+    ToUpper(str);
+    // str should now be "HELLO WORLD! 123 ABC XYZ."
+    
+
+}
