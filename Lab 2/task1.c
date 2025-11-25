@@ -50,24 +50,20 @@ void main(void)
 
 	TACCTL0 = CCIE;           // TA0 CCR0 control: TACCR0 interrupt enabled
 
-	TACCR0 = 32768;           // TA0 capture/compare register (1Hz interrupts with ACLK )
+    TACCR0 = 12500;              // 100 ms interrupts
+	TACTL = TASSEL_2 | ID_3 | MC_1;  // SMCLK, divider /8, up mode
 
-	TACTL = TASSEL_1 + MC_1;  // CHANGED: ACLK, up mode
-
-	_BIS_SR(LPM3_bits + GIE); // Enter LPM3 (active ACLK) w/ interrupt
+    _BIS_SR(LPM0_bits | GIE);
 }
 
-// Timer A0 interrupt service routine
 #pragma vector = TIMER0_A0_VECTOR
 __interrupt void Timer_A(void)
 {
-	// Toggle only every 5 interrupts: toggle rate = 1 / 5 Hz = 0.2 Hz
-	// both rising and falling edge = toggle_rate / 2 = 0.1 Hz
-	count++;
-    if (count >= 5) {
-		count = 0;
-		P1OUT ^= 0x01; // Toggle P1.0
-	}
+    count++;
+    if (count >= 50) {               // 50 × 0.1 s = 5 s = toggle = 0.1 Hz
+        count = 0;
+        P1OUT ^= BIT0;
+    }
 }
 
 */
