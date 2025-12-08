@@ -1,3 +1,13 @@
+/*
+Write a program to use watchdog timer in the interval timer mode. Follow the steps below
+• Configure the WDT as timer mode
+• Select the WDT clock source from SMCLK
+• Enable the WDT interrupt
+• Handle the WDT interrupt WDT_VECTOR in the interrupt service routine
+• Toggle P0_1 (Red led) in the interrupt service routine
+• Connect P0_1 with the oscilloscope, change the WDT interval to each of the four intervals and observe the output frequency from P0_1.
+*/
+
 #include <msp430g2553.h>
 
 void main(void)
