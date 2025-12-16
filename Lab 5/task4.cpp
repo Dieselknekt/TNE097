@@ -92,7 +92,7 @@ class CEmployeeTaskPriv : private CEmployee {
             cout << "ID: " << getId() << endl;
             cout << "Salary: " << getSalary() << endl;
             cout << "Department: " << department << endl;
-            cout << "Is Manager: " << (isManager ? "Yes" : "No") << endl;
+            cout << "Is Manager: " << (isManager ? "Yes" : "No") << endl << endl;
         }
 
     private:

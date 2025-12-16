@@ -6,7 +6,7 @@ class CVehicle {
 public:
     CVehicle(string vType, string vMake, string vModel, int vYear, float vMaxSpeed, int vPassengerCapacity, string vColor)
         : type(vType), make(vMake), model(vModel), year(vYear), maxSpeed(vMaxSpeed), passengerCapacity(vPassengerCapacity), color(vColor) {}
-
+    int year;
     void setType(string newType) {
         type = newType;
     }  
@@ -74,7 +74,6 @@ private:
     string type;
     string make;
     string model;
-    int year;
     float maxSpeed;
     int passengerCapacity;
     string color;
@@ -90,15 +89,23 @@ int main() {
     CVehicle car1("Car", "Land Rover", "Defender", 1999, 180.0, 5, "Green");
     CVehicle car2("Car", "Honda", "Civic", 2019, 200.0, 5, "Blue");
 
-    cout << "Before swapping colors:" << endl;
+    cout << "Before swapping colors and years:" << endl;
     car1.displayInfo();
     cout << endl;
     car2.displayInfo();
     cout << endl;
 
+    //parameter swap, using function for private variable
     swapColors(car1, car2);
 
-    cout << "After swapping colors:" << endl;
+    //Otra vez, con los pointos gigantes
+    CVehicle* p1 = &car1;
+    CVehicle* p2 = &car2;
+    int temp = p1->year;
+    p1->year = p2->year;
+    p2->year = temp;
+
+    cout << "After swapping colors and years:" << endl;
     car1.displayInfo();
     cout << endl;
     car2.displayInfo();
