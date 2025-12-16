@@ -10,6 +10,7 @@ void main(void)
 	// We have 0.95 Hz and need around 1.9Hz. To do this we use CCR1 compare interrupt. 
     // this gives us an an extra toggle halfway through the timer range - 
     // we get twice as many toggles per overflow.
+	
 	TACCTL1 = CCIE;          // ADDED: Enable CCR1 interrupt
 	TACCR1  = 0x8000;        // Compare at half of 16-bit timer range
 

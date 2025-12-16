@@ -4,10 +4,6 @@
 using namespace std;
 
 class CEmployee{
-    private:
-        string name;
-        int id;
-        int salary;
     public:
         void setName(string empName) {
             name = empName;
@@ -27,9 +23,13 @@ class CEmployee{
         int getSalary() {
             return salary;
         }
+    private:
+        string name;
+        int id;
+        int salary;
 };
 
-class CEmployeeFunction {
+class CEmployeeFunction : CEmployee {
     private:
         string department;
         bool isManager;
